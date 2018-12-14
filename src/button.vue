@@ -47,10 +47,10 @@
         border-radius: var(--border-radius);
         border: 1px solid var(--border-color);
         background: var(--button-bg);
-        display: inline-flex;;
+        display: inline-flex;
         justify-content: center;
         align-items: center;
-        vertical-align: top;
+        vertical-align: middle;
 
         &:hover {
             border-color: var(--border-color-hover);
