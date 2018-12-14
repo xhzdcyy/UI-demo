@@ -23,17 +23,35 @@
             --border-color: #999;
             --border-color-hover: #666;
         }
-    #app{
-        margin: 20px;
-    }
+
+        #app {
+            margin: 20px;
+        }
+    </style>
+    <style type="text/css">
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
 <div id="app">
-    <g-button></g-button>
+    <g-button icon="setting">
+        jsjscss
+    </g-button>
+    <g-button icon="setting" icon-position="left">
+        jsjscss
+    </g-button>
+    <g-button icon="setting" icon-position="right">
+        jsjscss
+    </g-button>
 </div>
 
 <script src="./src/app.js"></script>
-
+<script src="//at.alicdn.com/t/font_966279_jw9bgnthrk.js"></script>
 </body>
 </html>
