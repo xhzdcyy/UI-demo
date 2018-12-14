@@ -1,10 +1,7 @@
 <template>
-    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
-        <!--<svg v-if="icon" class="icon" aria-hidden="true">-->
-        <!--<use :xlink:href="`#icon-${icon}`"></use>-->
-        <!--</svg>-->
-        <g-icon class="loading" name="loading"></g-icon>
-        <g-icon v-if="icon" :name="icon"></g-icon>
+    <button class="g-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')">
+        <g-icon v-if="loading" class="loading" name="loading"></g-icon>
+        <g-icon v-if="icon && !loading" :name="icon"></g-icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -16,6 +13,10 @@
         // props: ['icon', 'iconPosition']
         props: {
             icon: {},
+            loading: {
+                type: Boolean,
+                default: false
+            },
             iconPosition: {
                 type: String,
                 default: 'left',
@@ -83,7 +84,8 @@
                 order: 1;
             }
         }
-        .loading{
+
+        .loading {
             animation: spin 1s infinite linear;
         }
     }
