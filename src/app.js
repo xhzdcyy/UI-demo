@@ -3,28 +3,30 @@ import Button from './button';
 import Icon from './icon'
 import ButtonGroup from './button-group'
 import chai from 'chai';
+import spies from 'chai-spies'
 
 Vue.component('g-button', Button);
-Vue.component('g-icon',Icon);
-Vue.component('g-button-group',ButtonGroup)
+Vue.component('g-icon', Icon);
+Vue.component('g-button-group', ButtonGroup)
 
 new Vue({
     el: '#app',
-    data:{
-        loading1:false,
-        loading2:true,
-        loading3:true
+    data: {
+        loading1: false,
+        loading2: true,
+        loading3: true
     }
 })
 
 
 //单元测试
+chai.use(spies);
 const expect = chai.expect;
 {
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
-        propsData:{
-            icon:'setting'
+        propsData: {
+            icon: 'setting'
         }
     });
     vm.$mount();
@@ -36,9 +38,9 @@ const expect = chai.expect;
 {
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
-        propsData:{
-            icon:'setting',
-            loading:true
+        propsData: {
+            icon: 'setting',
+            loading: true
         }
     });
     vm.$mount();
@@ -52,8 +54,8 @@ const expect = chai.expect;
     document.body.append(div);
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
-        propsData:{
-            icon:'setting'
+        propsData: {
+            icon: 'setting'
         }
     });
     vm.$mount(div);
@@ -68,9 +70,9 @@ const expect = chai.expect;
     document.body.append(div);
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
-        propsData:{
-            icon:'setting',
-            iconPosition:'right'
+        propsData: {
+            icon: 'setting',
+            iconPosition: 'right'
         }
     });
     vm.$mount(div);
@@ -84,14 +86,16 @@ const expect = chai.expect;
 {
     const Constructor = Vue.extend(Button);
     const vm = new Constructor({
-        propsData:{
-            icon:'setting'
+        propsData: {
+            icon: 'setting'
         }
     });
     vm.$mount();
-    vm.$on('click',function(){
-        console.log(1);
-    })
+    let spy = chai.spy(function () {
+        console.log('spy');
+    });
+    vm.$on('click', spy)
     let button = vm.$el;
     button.click();
+    expect(spy).to.have.been.called();
 }
