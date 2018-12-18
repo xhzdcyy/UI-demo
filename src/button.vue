@@ -9,8 +9,11 @@
     </button>
 </template>
 <script>
+    import Icon from './icon'
     export default {
-        // props: ['icon', 'iconPosition']
+        components:{
+            'g-icon' :  Icon
+        },
         props: {
             icon: {},
             loading: {
@@ -21,7 +24,6 @@
                 type: String,
                 default: 'left',
                 validator(value) {
-                    console.log(value);
                     return (value === 'left' || value === 'right');
                 }
 
