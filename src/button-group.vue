@@ -5,6 +5,7 @@
 </template>
 <script>
     export default {
+        name:'GuluButtonGroup',
         mounted() {
             console.log('haha');
             console.log(this.$el);
@@ -16,7 +17,7 @@
         }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .g-button-group {
         display: inline-flex;
         vertical-align: middle;
