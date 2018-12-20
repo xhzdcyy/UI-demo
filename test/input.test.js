@@ -68,43 +68,15 @@ describe('Input', () => {
             vm.$destroy();
         })
         it('支持input事件', () => {
-            vm = new Constructor({}).$mount();
-            const callback = sinon.fake();
-            vm.$on('input',callback);
-            let event = new Event('input');
-            const inputElement = vm.$el.querySelector('input');
-            inputElement.dispatchEvent(event);
-            expect(callback).to.have.been.calledWith(event);
-        })
-
-        it('支持change事件', () => {
-            vm = new Constructor({}).$mount();
-            const callback = sinon.fake();
-            vm.$on('change',callback);
-            let event = new Event('change');
-            const inputElement = vm.$el.querySelector('input');
-            inputElement.dispatchEvent(event);
-            expect(callback).to.have.been.calledWith(event);
-        })
-
-        it('支持focus事件', () => {
-            vm = new Constructor({}).$mount();
-            const callback = sinon.fake();
-            vm.$on('focus',callback);
-            let event = new Event('focus');
-            const inputElement = vm.$el.querySelector('input');
-            inputElement.dispatchEvent(event);
-            expect(callback).to.have.been.calledWith(event);
-        })
-
-        it('支持blur事件', () => {
-            vm = new Constructor({}).$mount();
-            const callback = sinon.fake();
-            vm.$on('blur',callback);
-            let event = new Event('blur');
-            const inputElement = vm.$el.querySelector('input');
-            inputElement.dispatchEvent(event);
-            expect(callback).to.have.been.calledWith(event);
+            ['input','change','focus','blur'].forEach((eventName) => {
+                vm = new Constructor({}).$mount();
+                const callback = sinon.fake();
+                vm.$on(eventName,callback);
+                let event = new Event(eventName);
+                const inputElement = vm.$el.querySelector('input');
+                inputElement.dispatchEvent(event);
+                expect(callback).to.have.been.calledWith(event);
+            })
         })
 
     })
