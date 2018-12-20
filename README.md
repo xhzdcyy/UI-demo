@@ -1,5 +1,5 @@
 #  自制UI组件库
-
+[![Build Status](https://www.travis-ci.org/xhzdcyy/UI-demo.svg?branch=master)](https://www.travis-ci.org/xhzdcyy/UI-demo)
 ## 介绍
 
 一个基于vue的UI组件库，不断完善中。
