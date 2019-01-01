@@ -12,18 +12,6 @@ describe('Row', () => {
     });
 
     it('接受gutter属性', (done) => {
-        // const div = document.createElement('div')
-        // document.body.appendChild(div)
-        // const RowConstructor = Vue.extend(Row);
-        // const row = new RowConstructor({
-        //     propsData:{
-        //         gutter:10
-        //     }
-        // });
-        // const ColConstructor = Vue.extend(Col);
-        // const col = new ColConstructor();
-        // const inputElement = vm.$el.querySelector('input');
-        // expect(inputElement.value).to.equal('12306');
         Vue.component('g-row',Row);
         Vue.component('g-col',Col);
         const div = document.createElement('div');
