@@ -39,14 +39,18 @@ new Vue({
         inputChange(e) {
             console.log(e.target.value);
         },
-        showTosat(){
-            this.$toast('我是messages 内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容',{
+        showToast(){
+            this.$toast('你的智商需要充值',{
                 closeButton:{
                     text:'知道了',
                     callback(){
                         console.log('i know');
                     }
-                }
+                },
+                autoClose:false,
+                autoCloseDelay:2,
+                position:'top'
+
             });
         }
     }
