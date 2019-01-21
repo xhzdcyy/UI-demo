@@ -40,7 +40,14 @@ new Vue({
             console.log(e.target.value);
         },
         showTosat(){
-            this.$toast('hello');
+            this.$toast('我是messages 内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容',{
+                closeButton:{
+                    text:'知道了',
+                    callback(){
+                        console.log('i know');
+                    }
+                }
+            });
         }
     }
 })
