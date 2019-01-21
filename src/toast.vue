@@ -1,13 +1,15 @@
 <template>
-    <div class="toast" ref="toast":class="toastClasses">
-        <div class="message">
-            <slot></slot>
-        </div>
+    <div class="wrapper" :class="toastClasses">
+        <div class="toast" ref="toast">
+            <div class="message">
+                <slot></slot>
+            </div>
 
-        <div class="line" ref="line"></div>
-        <span v-if="closeButton" class="close" @click="onClickClose">
+            <div class="line" ref="line"></div>
+            <span v-if="closeButton" class="close" @click="onClickClose">
             {{closeButton.text}}
         </span>
+        </div>
     </div>
 </template>
 <script>
@@ -33,11 +35,11 @@
                     }
                 }
             },
-            position:{
-                type:String,
-                default:'top',
-                validator(value){
-                    return ['top','middle','bottom'].includes(value);
+            position: {
+                type: String,
+                default: 'top',
+                validator(value) {
+                    return ['top', 'middle', 'bottom'].includes(value);
                 }
             }
         },
@@ -45,10 +47,10 @@
             this.execAutoClose();
             this.updateStyles();
         },
-        computed:{
-            toastClasses(){
+        computed: {
+            toastClasses() {
                 return {
-                    [`position-${this.position}`]:true
+                    [`position-${this.position}`]: true
                 }
             }
         },
@@ -82,11 +84,58 @@
     $font-size: 14px;
     $toast-height: 40px;
     $toast-bg: rgba(0, 0, 0, 0.75);
-    .toast {
-        position: fixed;
-        top: 0;
-        left: 50%;
+    @keyframes slide-up {
+        0% {opacity: 0; transform: translateY(100%);}
+        100% {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes slide-down {
+        0% {opacity: 0; transform: translateY(-100%);}
+        100% {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fade-in {
+        0% {opacity: 0; }
+        100% {opacity: 1;}
+    }
+
+    .wrapper {
         transform: translateX(-50%);
+        left: 50%;
+        position: fixed;
+        $animation-duration:300ms;
+        &.position-top {
+            top: 0;
+
+            .toast {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                animation: slide-down $animation-duration;
+            }
+
+        }
+
+        &.position-middle {
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: fade-in $animation-duration;
+        }
+
+        &.position-bottom {
+            bottom: 0;
+
+            .toast {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+                animation: slide-up $animation-duration;
+            }
+
+        }
+
+    }
+
+    .toast {
+
         font-size: $font-size;
         color: white;
         line-height: 1.8;
@@ -108,20 +157,11 @@
             margin-left: 16px;
             flex-shrink: 0;
         }
-        .message{
+
+        .message {
             padding: 8px 0;
         }
-        &.position-top{
-            top: 0;
-        }
-        &.position-middle{
-            top: 50%;
-            transform: translate(-50%, -50%);
 
-        }
-        &.position-bottom{
-            bottom: 0;
-        }
 
     }
 

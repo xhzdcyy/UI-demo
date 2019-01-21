@@ -12,6 +12,7 @@ import Content from './content'
 import Footer from './footer'
 import Toast from './toast'
 import plugin from './plugin'
+
 Vue.component('g-button', Button);
 Vue.component('g-icon', Icon);
 Vue.component('g-button-group', ButtonGroup);
@@ -33,25 +34,34 @@ new Vue({
         loading3: true,
         message: 'hi'
     },
-    created(){
+    created() {
     },
     methods: {
         inputChange(e) {
             console.log(e.target.value);
         },
-        showToast(){
-            this.$toast('你的智商需要充值',{
-                closeButton:{
-                    text:'知道了',
-                    callback(){
+        showToast(position) {
+            this.$toast('你的智商需要充值', {
+                closeButton: {
+                    text: '知道了',
+                    callback() {
                         console.log('i know');
                     }
                 },
-                autoClose:false,
-                autoCloseDelay:2,
-                position:'top'
-
+                autoClose: false,
+                autoCloseDelay: 2,
+                position: position
             });
-        }
-    }
+        },
+        showToast1(){
+            this.showToast('top');
+        },
+        showToast2(){
+            this.showToast('middle');
+        },
+        showToast3(){
+            this.showToast('bottom');
+        },
+
+}
 })
