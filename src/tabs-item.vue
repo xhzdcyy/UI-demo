@@ -1,10 +1,6 @@
 <template>
     <div class="tabs-item" @click="xxx" :class="classes">
         <slot></slot>
-        <div class="actions-wrapper">
-            <slot name="actions"></slot>
-        </div>
-
     </div>
 </template>
 <script>
@@ -52,11 +48,18 @@
     }
 </script>
 <style lang="scss" scoped>
+    $blue:blue;
     .tabs-item {
         flex-shrink: 0;
         padding: 0 2em;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
         &.active{
-            background: red;
+            color: $blue;
+            font-weight: bold;
+            border-bottom: 1px solid $blue;
         }
     }
 </style>
