@@ -4,23 +4,35 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
+
     export default {
         name: 'GuluTabs',
-        props:{
-            selected:{
-                type:String,
-                required:true
-            },
-            direction:{
+        props: {
+            selected: {
                 type: String,
-                default:'horizontal',
-                validator(value){
-                    return ['horizontal','vertical'].contains(value);
+                required: true
+            },
+            direction: {
+                type: String,
+                default: 'horizontal',
+                validator(value) {
+                    return ['horizontal', 'vertical'].indexOf(value)>=0;
                 }
             }
         },
-        created() {
-
+        data() {
+            return {
+                eventBus: new Vue()
+            }
+        },
+        provide() {
+            return {
+                eventBus: this.eventBus
+            }
+        },
+        mounted() {
+            this.eventBus.$emit('update:selected',this.selected)
         }
     }
 </script>
