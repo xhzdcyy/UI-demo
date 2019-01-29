@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" @click="onClick" ref="popover">
+    <div class="popover" ref="popover">
         <div class="content-wrapper" v-if="visible" ref="contentWrapper" :class="{[`position-${position}`]:true}">
             <slot name="content"></slot>
         </div>
@@ -16,7 +16,39 @@
         name: 'GuluPopover',
         data() {
             return {
-                visible: false
+                visible: false,
+            }
+        },
+        mounted() {
+            if (this.trigger === 'click') {
+                this.$refs.popover.addEventListener('click', this.onClick);
+            } else {
+                this.$refs.popover.addEventListener('mouseenter', this.open);
+                this.$refs.popover.addEventListener('mouseleave', this.close);
+            }
+        },
+        destroyed(){
+            if (this.trigger === 'click') {
+                this.$refs.popover.removeEventListener('click', this.onClick);
+            } else {
+                this.$refs.popover.removeEventListener('mouseenter', this.open);
+                this.$refs.popover.removeEventListener('mouseleave', this.close);
+            }
+        },
+        computed: {
+            openEvent() {
+                if (this.trigger === 'click') {
+                    return 'click'
+                } else {
+                    return 'mouseenter'
+                }
+            },
+            closeEvent() {
+                if (this.trigger === 'click') {
+                    return 'click'
+                } else {
+                    return 'mouseleave'
+                }
             }
         },
         props: {
@@ -26,19 +58,25 @@
                 validator(value) {
                     return ['top', 'bottom'].indexOf(value) >= 0;
                 }
+            },
+            trigger: {
+                type: String,
+                default: 'click',
+                validator(value) {
+                    return ['click', 'hover'].indexOf(value) >= 0;
+                }
             }
-
         },
         methods: {
             positionContent() {
                 document.body.appendChild(this.$refs.contentWrapper);
                 let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect();
-                if(this.position==='top'){
+                if (this.position === 'top') {
                     this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
                     this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
-                }else if(this.position==='bottom'){
+                } else if (this.position === 'bottom') {
                     this.$refs.contentWrapper.style.left = left + window.scrollX + 'px';
-                    this.$refs.contentWrapper.style.top = top + height+window.scrollY + 'px';
+                    this.$refs.contentWrapper.style.top = top + height + window.scrollY + 'px';
                 }
             },
             onClickDocument(e) {
@@ -74,8 +112,7 @@
                 }
             },
         },
-        mounted() {
-        }
+
     }
 </script>
 
@@ -99,6 +136,7 @@
         padding: .5em 1em;
         max-width: 20em;
         word-break: break-all;
+
         &::before, &::after {
             content: '';
             display: block;
@@ -110,26 +148,30 @@
         }
 
 
-        &.position-top{
+        &.position-top {
             transform: translateY(-100%);
             margin-top: -10px;
-            &::before{
+
+            &::before {
                 border-top-color: black;
                 top: 100%;
             }
+
             &::after {
                 border-top-color: white;
                 top: calc(100% - 1px);
             }
         }
 
-        &.position-bottom{
+        &.position-bottom {
             margin-top: 10px;
-            &::before{
+
+            &::before {
                 border: 10px solid transparent;
                 border-bottom-color: black;
                 bottom: 100%;
             }
+
             &::after {
                 border-bottom-color: white;
                 bottom: calc(100% - 1px);
