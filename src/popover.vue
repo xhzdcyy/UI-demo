@@ -141,8 +141,6 @@
             content: '';
             display: block;
             border: 10px solid transparent;
-            width: 0;
-            height: 10px;
             position: absolute;
             left: 10px;
         }
@@ -153,11 +151,13 @@
             margin-top: -10px;
 
             &::before {
+                border-bottom: none;
                 border-top-color: black;
                 top: 100%;
             }
 
             &::after {
+                border-bottom: none;
                 border-top-color: white;
                 top: calc(100% - 1px);
             }
@@ -167,14 +167,17 @@
             margin-top: 10px;
 
             &::before {
-                border: 10px solid transparent;
+                border-top: none;
                 border-bottom-color: black;
+
                 bottom: 100%;
             }
 
             &::after {
+
                 border-bottom-color: white;
                 bottom: calc(100% - 1px);
+                border-top: none;
             }
         }
 
