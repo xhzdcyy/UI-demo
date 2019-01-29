@@ -1,7 +1,7 @@
 <template>
-    <div class="popover" @click.stop="xxx">
-        <div class="content-wrapper" v-if="visible" ref="contentWrapper" @click.stop>
-            <slot name="content" ></slot>
+    <div class="popover" @click="onClick" ref="popover">
+        <div class="content-wrapper" v-if="visible" ref="contentWrapper">
+            <slot name="content"></slot>
         </div>
         <span ref="triggerWrapper">
             <slot></slot>
@@ -20,30 +20,51 @@
             }
         },
         methods: {
-            xxx() {
-                console.log(1);
-                this.visible = !this.visible;
-                if(this.visible){
-                    this.$nextTick(()=>{
-                        document.body.appendChild(this.$refs.contentWrapper);
-                        let {width,height,top,left} = this.$refs.triggerWrapper.getBoundingClientRect();
-                        this.$refs.contentWrapper.style.left = left+'px';
-                        this.$refs.contentWrapper.style.top = top+'px';
-                        let eventHandler =()=>{
-                            this.visible = false;
-                            document.removeEventListener('click',eventHandler)
-                        };
-                        document.addEventListener('click',eventHandler)
-                    })
+            positionContent() {
+                document.body.appendChild(this.$refs.contentWrapper);
+                let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect();
+                this.$refs.contentWrapper.style.left = left + 'px';
+                this.$refs.contentWrapper.style.top = top + window.scrollY + 'px';
+            },
+            onClickDocument(e)  {
+                if (this.$refs.popover && this.$refs.popover.contains(e.target) || this.$refs.contentWrapper.contains(e.target)) {
+                    return
                 }
-            }
+                this.close()
+            },
+            listenToDocument() {
+                console.log('开始监听');
+                document.addEventListener('click', this.onClickDocument)
+            },
+            open() {
+                this.visible = true;
+                this.$nextTick(() => {
+                    this.positionContent();
+                    this.listenToDocument();
+                })
+            },
+            close() {
+                this.visible = false;
+                console.log('关闭');
+                console.log('结束监听');
+                document.removeEventListener('click', this.onClickDocument)
+            },
+            onClick(event) {
+                if (this.$refs.triggerWrapper.contains(event.target)) {
+                    if (this.visible) {
+                        this.close();
+                    } else {
+                        this.open();
+                    }
+                }
+            },
         },
         mounted() {
         }
     }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
     .popover {
         display: inline-block;
         vertical-align: top;
@@ -51,14 +72,12 @@
         color: blue;
 
     }
-    .content-wrapper{
+
+    .content-wrapper {
         position: absolute;
-        /*bottom: 100%;*/
-        /*left: 0;*/
-        /*color: red;*/
         border: 1px solid red;
-        box-shadow: 0 0 3px rgba(0,0,0,0.5);
-        transform:translateY(-100%);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        transform: translateY(-100%);
 
     }
 </style>
