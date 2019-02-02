@@ -1,4 +1,5 @@
 module.exports = {
+    base:'/UI-demo/',
     title: 'UI demo',
     description: 'Just a UI demo',
     themeConfig: {

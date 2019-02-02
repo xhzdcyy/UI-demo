@@ -7,13 +7,11 @@
         <pre>
             <code>{{content}}</code>
         </pre>
-
     </div>
 </template>
 
 <script>
     import Button from '../../../src/button'
-
     export default {
         components: {
             'g-button': Button
