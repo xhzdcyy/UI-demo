@@ -100,13 +100,13 @@
     }
 
     .wrapper {
+        z-index: 999;
         transform: translateX(-50%);
         left: 50%;
         position: fixed;
         $animation-duration:300ms;
         &.position-top {
             top: 0;
-
             .toast {
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;

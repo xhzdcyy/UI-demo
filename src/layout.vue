@@ -27,9 +27,11 @@
         display: flex;
         flex-direction:  column;
         flex-grow: 1;
+        margin: 0;
         &.hasSider{
             flex-direction: row;
         }
+        
     }
 
 </style>

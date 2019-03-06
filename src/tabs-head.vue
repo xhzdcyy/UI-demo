@@ -20,7 +20,7 @@
         height: $tab-height;
         justify-content: flex-start;
 
-        border: 1px solid red;
+        border: 1px solid #eee;
         position: relative;
 
 

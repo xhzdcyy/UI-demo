@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade">
+    <transition name="side">
         <div class="sider" v-if="visible">
             <slot></slot>
             <button @click="visible=false">close</button>
@@ -14,11 +14,10 @@
                 visible: true
             }
         },
-        methods:{
-        }
+
     }
 </script>
-<style lang="scss" scoped>
+<style scoped lang="scss">
     .sider {
         position: relative;
         > button {
@@ -26,13 +25,13 @@
             top: 0;
             right: 0;
         }
-    ;
-
     }
 
-    .fade-enter-active, .fade-leave-active {
+    .side-enter-active, .side-leave-active {
         transition: all .5s;
     }
 
-
+    .side-enter, .side-leave-to {
+        margin-left: -200px;
+    }
 </style>
