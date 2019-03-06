@@ -1,30 +1,17 @@
 <template>
-    <div>
-        <g-button>按钮</g-button>
-        <g-button icon="setting">按钮</g-button>
-        <g-button :loading="true">按钮</g-button>
-        <g-button disabled>按钮</g-button>
-        <pre>
-            <code>{{content}}</code>
-        </pre>
-    </div>
+  <div>
+    <g-button>默认按钮</g-button>
+    <g-button icon="setting">设置</g-button>
+    <g-button icon="download" icon-position="right">下载</g-button>
+    <g-button :loading="true">登录中</g-button>
+  </div>
 </template>
 
 <script>
-    import Button from '../../../src/button'
-    export default {
-        components: {
-            'g-button': Button
-        },
-        data() {
-            return {
-                content: `
-            <g-button>按钮</g-button>
-            <g-button icon="setting">按钮</g-button>
-            <g-button :loading="true">按钮</g-button>
-            <g-button disabled>按钮</g-button>
-            `
-            }
-        }
-    }
+import Button from "../../../src/button";
+export default {
+  components: {
+    "g-button": Button
+  },
+};
 </script>
