@@ -38,10 +38,10 @@ describe('Input', () => {
             expect(inputElement.disabled).to.equal(true);
         })
 
-        it('接受readonly.', () => {
+        it('接受readOnly.', () => {
             vm = new Constructor({
                 propsData: {
-                    readonly: true
+                    readOnly: true
                 }
             }).$mount();
             const inputElement = vm.$el.querySelector('input');
